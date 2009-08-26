@@ -40,7 +40,7 @@ module ExtendedFormHelper
 
     if (obj = (object.respond_to?(:errors) ? object : instance_variable_get("@#{object}"))) && (errors = obj.errors.on(method))
       if errors.is_a?(Array)
-        content_tag(:ul, errors.map{ |error| content_tag(:li, "#{options[:prepend_text]}#{error}#{options[:append_text]}", :class => options[:css_class]) }, :class => options[:css_class].pluralize)
+        content_tag(:ul, errors.uniq.map{ |error| content_tag(:li, "#{options[:prepend_text]}#{error}#{options[:append_text]}", :class => options[:css_class]) }, :class => options[:css_class].pluralize)
       else
         content_tag(:div, "#{options[:prepend_text]}#{errors}#{options[:append_text]}", :class => options[:css_class])
       end
